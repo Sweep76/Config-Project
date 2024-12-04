@@ -1,40 +1,20 @@
-// src/components/AccountList.jsx
-import React, { useState } from 'react';
-import Account from './Account';
-import Deposit from './Deposit';
-import Withdraw from './Withdraw';
-import accountsData from '../data/accounts';
+// Add this to AccountList.jsx
+const [transactions, setTransactions] = useState([]);
 
-const AccountList = () => {
-  const [accounts, setAccounts] = useState(accountsData);
-
-  const handleDeposit = (id, amount) => {
-    setAccounts((prev) =>
-      prev.map((account) =>
-        account.id === id ? { ...account, balance: account.balance + amount } : account
-      )
-    );
-  };
-
-  const handleWithdraw = (id, amount) => {
-    setAccounts((prev) =>
-      prev.map((account) =>
-        account.id === id ? { ...account, balance: account.balance - amount } : account
-      )
-    );
-  };
-
-  return (
-    <div className="account-list">
-      {accounts.map((account) => (
-        <div key={account.id}>
-          <Account account={account} />
-          <Deposit account={account} onDeposit={handleDeposit} />
-          <Withdraw account={account} onWithdraw={handleWithdraw} />
-        </div>
-      ))}
-    </div>
+const handleDeposit = (id, amount) => {
+  setAccounts((prev) =>
+    prev.map((account) =>
+      account.id === id ? { ...account, balance: account.balance + amount } : account
+    )
   );
+  setTransactions((prev) => [...prev, `Deposited $${amount} to account ID ${id}`]);
 };
 
-export default AccountList;
+const handleWithdraw = (id, amount) => {
+  setAccounts((prev) =>
+    prev.map((account) =>
+      account.id === id ? { ...account, balance: account.balance - amount } : account
+    )
+  );
+  setTransactions((prev) => [...prev, `Withdrew $${amount} from account ID ${id}`]);
+};
