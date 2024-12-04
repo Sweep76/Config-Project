@@ -1,4 +1,4 @@
-// src/components/AccountList.js
+// src/components/AccountList.jsx
 import React from 'react';
 import Account from './Account';
 import accounts from '../data/accounts';

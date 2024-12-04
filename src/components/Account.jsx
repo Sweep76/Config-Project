@@ -1,4 +1,4 @@
-// src/components/Account.js
+// src/components/Account.jsx
 import React from 'react';
 
 const Account = ({ account }) => {
